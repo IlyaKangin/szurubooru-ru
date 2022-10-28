@@ -1,41 +1,41 @@
-# szurubooru
+# szurubooru (ru)
 
-Szurubooru is an image board engine inspired by services such as Danbooru,
-Gelbooru and Moebooru dedicated for small and medium communities. Its name [has
-its roots in Polish language and has onomatopeic meaning of scraping or
-scrubbing](https://sjp.pwn.pl/sjp/;2527372). It is pronounced as *shoorubooru*.
+Szurubooru — это движок доски изображений, вдохновленный такими сервисами, как Danbooru,
+Gelbooru и Moebooru предназначены для малых и средних сообществ. Его имя [имеет
+имеет корни в польском языке и имеет звукоподражательное значение соскребания или
+очистка](https://sjp.pwn.pl/sjp/;2527372). Произносится как *шурубору*.
 
-## Features
+## Возможности
 
-- Post content: images (JPG, PNG, GIF, animated GIF), videos (MP4, WEBM), Flash animations
-- Ability to retrieve web video content using [youtube-dl](https://github.com/ytdl-org/youtube-dl)
-- Post comments
-- Post notes / annotations, including arbitrary polygons
-- Rich JSON REST API ([see documentation](doc/API.md))
-- Token based authentication for clients
-- Rich search system
-- Rich privilege system
-- Autocomplete in search and while editing tags
-- Tag categories
-- Tag suggestions
-- Tag implications (adding a tag automatically adds another)
-- Tag aliases
-- Pools and pool categories
-- Duplicate detection
-- Post rating and favoriting; comment rating
-- Polished UI
-- Browser configurable endless paging
-- Browser configurable backdrop grid for transparent images
+- Контент публикации: изображения (JPG, PNG, GIF, анимированные GIF), видео (MP4, WEBM), Flash-анимации
+- Возможность получения веб-видеоконтента с помощью [youtube-dl](https://github.com/ytdl-org/youtube-dl)
+- Оставлять комментарии
+- Публикуйте заметки/аннотации, включая произвольные полигоны
+- Богатый JSON REST API ([см. документацию](doc/API.md))
+- Аутентификация на основе токенов для клиентов
+- Богатая система поиска
+- Богатая система привилегий
+- Автозаполнение в поиске и при редактировании тегов
+- Категории тегов
+- Предложения тегов
+- Последствия тега (добавление тега автоматически добавляет другой)
+- Псевдонимы тегов
+- Бассейны и категории бассейнов
+- Обнаружение дубликатов
+- Опубликовать рейтинг и избранное; рейтинг комментария
+- Полированный интерфейс
+- Браузер настраиваемый бесконечный пейджинг
+- Настраиваемая в браузере фоновая сетка для прозрачных изображений
 
-## Installation
+## Установка
 
-It is recommended that you use Docker for deployment.
-[See installation instructions.](doc/INSTALL.md)
+Рекомендуется использовать Docker для развертывания.
+[См. Инструкции по установке.](doc/INSTALL.md)
 
-More installation resources, as well as related projects can be found on the
-[GitHub project Wiki](https://github.com/rr-/szurubooru/wiki)
+Дополнительные ресурсы по установке, а также связанные с ними проекты можно найти на
+[Wiki проекта GitHub](https://github.com/rr-/szurubooru/wiki)
 
-## Screenshots
+## Скриншоты
 
 Post list:
 
