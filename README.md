@@ -37,14 +37,14 @@ Gelbooru и Moebooru предназначены для малых и средн�
 
 ## Скриншоты
 
-Post list:
+Посты:
 
 ![20160908_180032_fsk](https://cloud.githubusercontent.com/assets/1045476/18356730/3f1123d6-75ee-11e6-85dd-88a7615243a0.png)
 
-Post view:
+Пост (один):
 
 ![20160908_180429_lmp](https://cloud.githubusercontent.com/assets/1045476/18356731/3f1566ee-75ee-11e6-9594-e86ca7347b0f.png)
 
-## License
+## Лицензия
 
 [GPLv3](LICENSE.md).
