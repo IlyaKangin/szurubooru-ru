@@ -1,71 +1,71 @@
-This assumes that you have Docker (version 17.05 or greater)
-and Docker Compose (version 1.6.0 or greater) already installed.
+Это предполагает, что у вас есть Docker (версия 17.05 или выше).
+и Docker Compose (версия 1.6.0 или выше) уже установлены.
 
-### Prepare things
+### Подготовка
 
-1. Download the `szurubooru` source:
-
-    ```console
-    user@host:~$ git clone https://github.com/rr-/szurubooru.git szuru
-    user@host:~$ cd szuru
-    ```
-2. Configure the application:
+1. Скачайте исходники:
 
     ```console
-    user@host:szuru$ cp server/config.yaml.dist server/config.yaml
-    user@host:szuru$ edit server/config.yaml
+    git clone https://github.com/rr-/szurubooru.git szuru
+    cd szuru
+    ```
+2. Настройте приложение:
+
+    ```console
+    cp server/config.yaml.dist server/config.yaml
+    edit server/config.yaml
     ```
 
-    Pay extra attention to these fields:
+    Обратите особое внимание на эти поля:
 
     - secret
     - the `smtp` section.
 
-    You can omit lines when you want to use the defaults of that field.
+    Вы можете опустить строки, если хотите использовать значения этого поля по умолчанию.
 
-3. Configure Docker Compose:
+3. Настройте Docker Compose:
 
     ```console
-    user@host:szuru$ cp doc/example.env .env
-    user@host:szuru$ edit .env
+    cp doc/example.env .env
+    edit .env
     ```
 
-    Change the values of the variables in `.env` as needed.
-    Read the comments to guide you. Note that `.env` should be in the root
-    directory of this repository.
+    Измените значения переменных в файле `.env` по мере необходимости.
+    Прочтите комментарии, которые помогут вам сориентироваться. Обратите внимание, что `.env` должен находиться в корневом
+    каталоге этого репозитория.
 
-4. Pull the containers:
+4. Вытащите контейнеры:
 
-    This pulls the latest containers from docker.io:
+    Это извлекает последние контейнеры из docker.io:
     ```console
-    user@host:szuru$ docker-compose pull
+    docker-compose pull
     ```
 
-    If you have modified the application's source and would like to manually
-    build it, follow the instructions in [**Building**](#Building) instead,
-    then read here once you're done.
+    Если вы изменили исходный код приложения и хотели бы вручную
+    постройте его, вместо этого следуйте инструкциям в [**Building **](#Building), а
+    затем прочитайте здесь, как только закончите.
 
-5. Run it!
+5. Запустите!
 
-    For first run, it is recommended to start the database separately:
+    Для первого запуска рекомендуется запускать базу данных отдельно:
     ```console
-    user@host:szuru$ docker-compose up -d sql
+    docker-compose up -d sql
     ```
 
-    To start all containers:
+    Чтобы запустить все контейнеры:
     ```console
-    user@host:szuru$ docker-compose up -d
+    docker-compose up -d
     ```
 
-    To view/monitor the application logs:
+    Для просмотра/мониторинга журналов приложений:
     ```console
-    user@host:szuru$ docker-compose logs -f
-    # (CTRL+C to exit)
+    docker-compose logs -f
+    # (CTRL+C для выхода)
     ```
 
-### Building
+### Сборка
 
-1. Edit `docker-compose.yml` to tell Docker to build instead of pull containers:
+1. Отредактируйте `docker-compose.yml`, чтобы указать Docker создавать, а не извлекать контейнеры:
 
     ```diff yaml
     ...
@@ -79,69 +79,69 @@ and Docker Compose (version 1.6.0 or greater) already installed.
     ...
     ```
 
-    You can choose to build either one from source.
+    Вы можете выбрать создание любого из них из исходного кода.
 
-2. Build the containers:
+2. Постройте контейнеры:
 
     ```console
-    user@host:szuru$ docker-compose build
+    docker-compose build
     ```
 
-    That will attempt to build both containers, but you can specify `client`
-    or `server` to make it build only one.
+    Это будет попытка построить оба контейнера, но вы можете указать `клиент`
+    или `сервер`, чтобы заставить его создавать только один.
 
-    If `docker-compose build` spits out:
+    Если `docker-compose build` выплевывает:
 
     ```
     ERROR: Service 'server' failed to build: failed to parse platform : "" is an invalid component of "": platform specifier component must match "^[A-Za-z0-9_-]+$": invalid argument
     ```
 
-    ...you will need to export Docker BuildKit flags:
+    ...вам нужно будет экспортировать флаги Docker Build Kit:
 
     ```console
-    user@host:szuru$ export DOCKER_BUILDKIT=1; export COMPOSE_DOCKER_CLI_BUILD=1
+    export DOCKER_BUILDKIT=1; export COMPOSE_DOCKER_CLI_BUILD=1
     ```
 
-    ...and run `docker-compose build` again.
+    ...и запустите `docker-compose build` опять.
 
-*Note: If your changes are not taking effect in your builds, consider building
-with `--no-cache`.*
+* Примечание: Если ваши изменения не вступают в силу в ваших сборках, рассмотрите возможность создания
+с помощью `--no-cache`.*
 
 
-### Additional Features
+### Дополнительные возможности
 
-1. **CLI-level administrative tools**
+1. **Административные инструменты на уровне CLI**
 
-    You can use the included `szuru-admin` script to perform various
-    administrative tasks such as changing or resetting a user password. To
-    run from docker:
+    Вы можете использовать прилагаемый скрипт szuru-admin для выполнения различных
+    административные задачи, такие как изменение или сброс пароля пользователя. Для
+запуска из docker:
 
     ```console
-    user@host:szuru$ docker-compose run server ./szuru-admin --help
+    docker-compose run server ./szuru-admin --help
     ```
 
-    will give you a breakdown on all available commands.
+    даст вам разбивку по всем доступным командам.
 
-2. **Using a seperate domain to host static files (image content)**
+2. **Использование отдельного домена для размещения статических файлов (содержимого изображений)**
 
-    If you want to host your website on, (`http://example.com/`) but want
-    to serve the images on a different domain, (`http://static.example.com/`)
-    then you can run the backend container with an additional environment
-    variable `DATA_URL=http://static.example.com/`. Make sure that this
-    additional host has access contents to the `/data` volume mounted in the
-    backend.
+    Если вы хотите разместить свой веб-сайт на, (`http://example.com /`), но хотите
+обслуживать изображения в другом домене, (`http://static.example.com /`)
+    затем вы можете запустить серверный контейнер с дополнительной средой
+    переменная `DATA_URL=http://static.example.com/`. Убедитесь, что этот
+дополнительный хост имеет доступ к содержимому тома "/data", смонтированного в
+серверной части.
 
-3. **Setting a specific base URI for proxying**
+3. **Установка определенного базового URI для прокси-сервера**
 
-    Some users may wish to access the service at a different base URI, such
-    as `http://example.com/szuru/`, commonly when sharing multiple HTTP
-    services on one domain using a reverse proxy. In this case, simply set
-    `BASE_URL="/szuru/"` in your `.env` file.
+    Некоторые пользователи могут пожелать получить доступ к сервису с другим базовым URI, например
+    как `http://example.com/szuru /`, обычно при совместном использовании нескольких HTTP
+    службы в одном домене с использованием обратного прокси-сервера. В этом случае просто установите
+    `BASE_URL="/szuru/"` в вашем файле `.env`.
 
-    Note that this will require a reverse proxy to function. You should set
-    your reverse proxy to proxy `http(s)://example.com/szuru` to
-    `http://<internal IP or hostname of frontend container>/`. For an NGINX
-    reverse proxy, that will appear as:
+    Обратите внимание, что для этого потребуется обратный прокси-сервер. Вы должны установить
+свой обратный прокси-сервер на прокси `http(ы)://example.com/szuru ` на
+`http://<внутренний IP-адрес или имя хоста контейнера интерфейса>/`. Для NGINX
+    обратный прокси-сервер, который будет отображаться как:
 
     ```nginx
     location /szuru {
@@ -159,14 +159,14 @@ with `--no-cache`.*
     }
     ```
 
-4. **Preparing for production**
+4. **Подготовка к производству**
 
-    If you plan on using szurubooru in a production setting, you may opt to
-    use a reverse proxy for added security and caching capabilities. Start
-    by having the client docker listen only on localhost by changing `PORT`
-    in your `.env` file to `127.0.0.1:8080` instead of simply `:8080`. Then
-    configure NGINX (or your caching/reverse proxy server of your choice)
-    to proxy_pass `http://127.0.0.1:8080`. An example config is shown below:
+    Если вы планируете использовать szurubooru в производственных условиях, вы можете выбрать
+обратный прокси-сервер для дополнительной безопасности и возможностей кэширования. Начать
+    заставив клиентский докер прослушивать только localhost, изменив `ПОРТ`
+    в вашем файле `.env` на `127.0.0.1:8080` вместо просто `:8080`. Затем
+настройте NGINX (или ваш кэширующий / обратный прокси-сервер по вашему выбору)
+    к proxy_pass `http://127.0.0.1:8080 `. Пример конфигурации показан ниже:
 
     ```nginx
     # ideally, use ssl termination + cdn with a provider such as cloudflare.
